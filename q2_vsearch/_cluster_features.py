@@ -183,7 +183,7 @@ def cluster_features_de_novo(sequences: DNAFASTAFormat, table: biom.Table,
                              ) -> (biom.Table, DNAFASTAFormat):
     clustered_sequences = DNAFASTAFormat()
     with tempfile.NamedTemporaryFile() as fasta_with_sizes:
-        with tempfile.NamedTemporaryFile() as out_uc:
+        with tempfile.NamedTemporaryFile(delete=False) as out_uc:
             _fasta_with_sizes(str(sequences), fasta_with_sizes.name, table)
             cmd = ['vsearch',
                    '--cluster_size', fasta_with_sizes.name,
